@@ -358,7 +358,7 @@ main() {
 
   # Window option
   if $show_powerline; then
-    tmux set-window-option -g window-status-current-format "#[fg=${prefix_status_bg},bg=${selection}]${left_sep}#[fg=${text},bg=${selection}] #I #W${current_flags} #[fg=${selection},bg=${prefix_status_bg}]${left_sep}"
+    tmux set-window-option -g window-status-current-format "#[fg=${bg_bar},bg=${selection}]${left_sep}#[fg=${text},bg=${selection}] #I #W${current_flags} #[fg=${selection},bg=${bg_bar}]${left_sep}"
   else
     tmux set-window-option -g window-status-current-format "#[fg=${text},bg=${selection}] #I #W${current_flags} "
   fi
@@ -367,7 +367,7 @@ main() {
     tmux set-window-option -g window-style "fg=${text},bg=${bg_pane}"
   fi
 
-  tmux set-window-option -g window-status-format "#[fg=${text}]#[bg=${prefix_status_bg}] #I #W${flags}"
+  tmux set-window-option -g window-status-format "#[fg=${text}]#[bg=${bg_bar}] #I #W${flags}"
   tmux set-window-option -g window-status-activity-style "bold"
   tmux set-window-option -g window-status-bell-style "bold"
 }

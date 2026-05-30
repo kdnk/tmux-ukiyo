@@ -35,6 +35,7 @@ TMUX_STUB_LOG="$log_file" PATH="$tmp_dir/bin:$PATH" bash "$repo_root/scripts/uki
 
 window_current_format="$(grep 'set-window-option -g window-status-current-format' "$log_file")"
 window_format="$(grep 'set-window-option -g window-status-format' "$log_file")"
+window_separator="$(grep 'set-window-option -g window-status-separator' "$log_file" || true)"
 first_status_right="$(grep 'set-option -ga status-right' "$log_file" | head -n 1)"
 
 if [[ "$window_current_format" == *'#{?client_prefix,'* ]]; then
@@ -46,6 +47,12 @@ fi
 if [[ "$window_format" == *'#{?client_prefix,'* ]]; then
   echo "window-status-format should keep window title gaps on the normal background"
   echo "$window_format"
+  exit 1
+fi
+
+if [[ "$window_separator" != *'bg=#2a2a37'* ]]; then
+  echo "window-status-separator should keep window title gaps on the normal background"
+  echo "$window_separator"
   exit 1
 fi
 

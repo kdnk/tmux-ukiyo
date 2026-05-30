@@ -126,8 +126,10 @@ main() {
     window_right_sep=''
   fi
 
+  prefix_status_bg="#{?client_prefix,${!left_icon_prefix_bg},${!status_bg}}"
+
   # Left icon, with prefix status
-  tmux set-option -g status-left "#{?client_prefix,#[fg=${!left_icon_prefix_fg}],#[fg=${!left_icon_fg}]}#{?client_prefix,#[bg=${!left_icon_prefix_bg}],#[bg=${!left_icon_bg}]}${icon_pd_l}${left_icon_content}${icon_pd_r}#{?client_prefix,#[fg=${!left_icon_prefix_bg}],#[fg=${!left_icon_bg}]}#[bg=${!status_bg}]${left_sep}${icon_mg_r}"
+  tmux set-option -g status-left "#{?client_prefix,#[fg=${!left_icon_prefix_fg}],#[fg=${!left_icon_fg}]}#{?client_prefix,#[bg=${!left_icon_prefix_bg}],#[bg=${!left_icon_bg}]}${icon_pd_l}${left_icon_content}${icon_pd_r}#{?client_prefix,#[fg=${!left_icon_prefix_bg}],#[fg=${!left_icon_bg}]}#[bg=${prefix_status_bg}]${left_sep}${icon_mg_r}"
   powerbg=${!status_bg}
 
   # Set timezone unless hidden by configuration
@@ -179,7 +181,7 @@ main() {
   tmux set-option -g message-style "bg=${bg_bar},fg=${text}"
 
   # status bar
-  tmux set-option -g status-style "bg=${!status_bg},fg=${text}"
+  tmux set-option -g status-style "bg=${prefix_status_bg},fg=${text}"
 
   # Handle left icon margin
   icon_mg_r=""

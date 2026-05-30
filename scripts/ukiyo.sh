@@ -126,9 +126,11 @@ main() {
     window_right_sep=''
   fi
 
+  prefix_status_bg="#{?client_prefix,${!left_icon_prefix_bg},${!status_bg}}"
+
   # Left icon, with prefix status
-  tmux set-option -g status-left "#{?client_prefix,#[fg=${!left_icon_prefix_fg}],#[fg=${!left_icon_fg}]}#{?client_prefix,#[bg=${!left_icon_prefix_bg}],#[bg=${!left_icon_bg}]}${icon_pd_l}${left_icon_content}${icon_pd_r}#{?client_prefix,#[fg=${!left_icon_prefix_bg}],#[fg=${!left_icon_bg}]}#[bg=${!status_bg}]${left_sep}${icon_mg_r}"
-  powerbg=${!status_bg}
+  tmux set-option -g status-left "#{?client_prefix,#[fg=${!left_icon_prefix_fg}],#[fg=${!left_icon_fg}]}#{?client_prefix,#[bg=${!left_icon_prefix_bg}],#[bg=${!left_icon_bg}]}${icon_pd_l}${left_icon_content}${icon_pd_r}#{?client_prefix,#[fg=${!left_icon_prefix_bg}],#[fg=${!left_icon_bg}]}#[bg=${prefix_status_bg}]${left_sep}${icon_mg_r}"
+  powerbg=${prefix_status_bg}
 
   # Set timezone unless hidden by configuration
   if [[ -z "$timezone" ]]; then
@@ -179,7 +181,7 @@ main() {
   tmux set-option -g message-style "bg=${bg_bar},fg=${text}"
 
   # status bar
-  tmux set-option -g status-style "bg=${!status_bg},fg=${text}"
+  tmux set-option -g status-style "bg=${prefix_status_bg},fg=${text}"
 
   # Handle left icon margin
   icon_mg_r=""
@@ -356,7 +358,7 @@ main() {
 
   # Window option
   if $show_powerline; then
-    tmux set-window-option -g window-status-current-format "#[fg=${bg_bar},bg=${selection}]${left_sep}#[fg=${text},bg=${selection}] #I #W${current_flags} #[fg=${selection},bg=${bg_bar}]${left_sep}"
+    tmux set-window-option -g window-status-current-format "#[fg=${prefix_status_bg},bg=${selection}]${left_sep}#[fg=${text},bg=${selection}] #I #W${current_flags} #[fg=${selection},bg=${prefix_status_bg}]${left_sep}"
   else
     tmux set-window-option -g window-status-current-format "#[fg=${text},bg=${selection}] #I #W${current_flags} "
   fi
@@ -365,7 +367,7 @@ main() {
     tmux set-window-option -g window-style "fg=${text},bg=${bg_pane}"
   fi
 
-  tmux set-window-option -g window-status-format "#[fg=${text}]#[bg=${bg_bar}] #I #W${flags}"
+  tmux set-window-option -g window-status-format "#[fg=${text}]#[bg=${prefix_status_bg}] #I #W${flags}"
   tmux set-window-option -g window-status-activity-style "bold"
   tmux set-window-option -g window-status-bell-style "bold"
 }

@@ -37,3 +37,9 @@ if [[ "$window_current_format" != *'#{?window_zoomed_flag,'*'Z,}'* ]]; then
   echo "$window_current_format"
   exit 1
 fi
+
+if [[ "$window_current_format" != *'#{?window_zoomed_flag,#[fg=#dcd7ba]Z,}'* ]]; then
+  echo "zoomed window marker should use the readable text color"
+  echo "$window_current_format"
+  exit 1
+fi

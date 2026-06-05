@@ -50,8 +50,8 @@ if [[ "$window_format" == *'#{?client_prefix,'* ]]; then
   exit 1
 fi
 
-if [[ "$window_format" != *'#[fg=#dcd7ba]#[bg=#2a2a37] #I #W ' ]]; then
-  echo "window-status-format should keep one leading and one trailing title space"
+if [[ "$window_format" != *'#[fg=#dcd7ba]#[bg=#2a2a37] #I #W#{?window_zoomed_flag,#[fg=#dca561] (Z),} ' ]]; then
+  echo "window-status-format should keep one leading and one trailing title space around inactive zoom markers"
   echo "$window_format"
   exit 1
 fi

@@ -154,7 +154,9 @@ main() {
     current_flags="#{?window_flags,#[fg=${highlight}]#{window_flags},}"
     ;;
   esac
-  current_flags="${current_flags}#{?window_zoomed_flag,#[fg=${orange}](Z),}"
+  zoomed_flag="#{?window_zoomed_flag,#[fg=${orange}] (Z),}"
+  flags="${flags}${zoomed_flag}"
+  current_flags="${current_flags}${zoomed_flag}"
 
   # sets refresh interval to every 5 seconds
   tmux set-option -g status-interval $show_refresh

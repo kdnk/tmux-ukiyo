@@ -32,14 +32,14 @@ TMUX_STUB_LOG="$log_file" PATH="$tmp_dir/bin:$PATH" bash "$repo_root/scripts/uki
 
 window_current_format="$(grep 'set-window-option -g window-status-current-format' "$log_file")"
 
-if [[ "$window_current_format" != *'#{?window_zoomed_flag,'*'Z,}'* ]]; then
-  echo "window-status-current-format should show Z when the current window is zoomed"
+if [[ "$window_current_format" != *'#{?window_zoomed_flag,'*'(Z),}'* ]]; then
+  echo "window-status-current-format should show (Z) when the current window is zoomed"
   echo "$window_current_format"
   exit 1
 fi
 
-if [[ "$window_current_format" != *'#{?window_zoomed_flag,#[fg=#dcd7ba]Z,}'* ]]; then
-  echo "zoomed window marker should use the readable text color"
+if [[ "$window_current_format" != *'#{?window_zoomed_flag,#[fg=#dca561](Z),}'* ]]; then
+  echo "zoomed window marker should use the orange text color"
   echo "$window_current_format"
   exit 1
 fi

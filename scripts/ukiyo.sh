@@ -154,7 +154,7 @@ main() {
     current_flags="#{?window_flags,#[fg=${highlight}]#{window_flags},}"
     ;;
   esac
-  current_flags="${current_flags}#{?window_zoomed_flag,#[fg=${text}]Z,}"
+  current_flags="${current_flags}#{?window_zoomed_flag,#[fg=${orange}](Z),}"
 
   # sets refresh interval to every 5 seconds
   tmux set-option -g status-interval $show_refresh
@@ -368,7 +368,7 @@ main() {
     tmux set-window-option -g window-style "fg=${text},bg=${bg_pane}"
   fi
 
-  tmux set-window-option -g window-status-format "#[fg=${text}]#[bg=${bg_bar}] #I #W${flags}"
+  tmux set-window-option -g window-status-format "#[fg=${text}]#[bg=${bg_bar}]#I #W${flags} "
   tmux set-window-option -g window-status-separator "#[fg=${bg_bar},bg=${bg_bar}] "
   tmux set-window-option -g window-status-activity-style "bold"
   tmux set-window-option -g window-status-bell-style "bold"

@@ -62,6 +62,12 @@ if [[ "$window_separator" != *'bg=#2a2a37'* ]]; then
   exit 1
 fi
 
+if [[ "$window_separator" == *'bg=#2a2a37] ' ]]; then
+  echo "window-status-separator should not add extra literal spacing between windows"
+  echo "$window_separator"
+  exit 1
+fi
+
 if [[ "$first_status_right" != *'bg=#{?client_prefix,'* ]]; then
   echo "status-right should start from the prefix-aware status background"
   echo "$first_status_right"
